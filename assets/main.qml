@@ -147,7 +147,6 @@ onTriggered: {
     var page = mapPages.createObject();
     page.latitude = selectedItem.fields.field13[0];
     page.longitude = selectedItem.fields.field13[1];
-    
     nav.push(page);
 }
         } 

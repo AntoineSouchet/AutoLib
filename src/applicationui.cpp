@@ -96,7 +96,7 @@ ApplicationUI::ApplicationUI(bb::cascades::Application *app) :
           }
 
           // set created root object as a scene
-          app->setScene(root);
+          bb::cascades::Application::instance()->setScene(root);
 }
 
 void ApplicationUI::onSystemLanguageChanged()

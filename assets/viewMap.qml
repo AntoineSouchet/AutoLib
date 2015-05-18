@@ -8,7 +8,7 @@ Page {
     property alias longitude : mapview.longitude
     
     MapView {
-
+        objectName: "mapViewObj"
         id: mapview
         altitude: 3000
         
