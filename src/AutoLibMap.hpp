@@ -18,10 +18,6 @@
     namespace bb {
     namespace cascades {
     class Application;
-    namespace maps
-            {
-                class MapView;
-            }
     }
     }
 
@@ -38,15 +34,11 @@
 
     public:
         AutoLibMap(bb::cascades::Application *app);
-
-        Q_INVOKABLE QVariantList worldToPixelInvokable(QObject* mapObject, double latitude, double longitude) const;
-        Q_INVOKABLE void updateMarkers(QObject* mapObject, QObject* containerObject) const;
-        Q_INVOKABLE void addPoint(double longitude,double latitude);
-        Q_INVOKABLE void Map();
+        Q_INVOKABLE void Map(double latitude,double longitude,QString adresse);
+        Q_INVOKABLE void MoreNear(double latitude,double longitude,QString adresse);
 
     private:
-        QPoint worldToPixel(QObject* mapObject, double latitude, double longitude) const;
-        bb::cascades::maps::MapView* mapView;
+
     };
 
     #endif

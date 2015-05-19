@@ -90,21 +90,9 @@ Page {
             accessibility.name: "FirstListView"
                 onTriggered: {
                     var selectedItem = dataModel.data(indexPath);
-                    _mapViewTest.addPoint(selectedItem.fields.field13[1], selectedItem.fields.field13[0]);
+                    _mapViewTest.Map(selectedItem.fields.field13[0], selectedItem.fields.field13[1],selectedItem.fields.rue);
                     }
-        } 
-        MapView {
-            id: mapview
-            altitude: 3000
-            preferredWidth: 768
-            preferredHeight: 1280
-            objectName: "mapViewObj"
-            visible: false;
-        }
-        onCreationCompleted: {
-           
-        }
-          
+        }           
     }
     actions: [                         
 
