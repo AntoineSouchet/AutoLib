@@ -36,7 +36,22 @@ simulator {
 
 config_pri_assets {
     OTHER_FILES += \
+        $$quote($$BASEDIR/assets/images/ic_map.png) \
+        $$quote($$BASEDIR/assets/images/ic_search.png) \
+        $$quote($$BASEDIR/assets/images/ic_share.png) \
+        $$quote($$BASEDIR/assets/images/me.png) \
         $$quote($$BASEDIR/assets/images/on_map_pin.png) \
+        $$quote($$BASEDIR/assets/logos/1024x600.png) \
+        $$quote($$BASEDIR/assets/logos/110x110.png) \
+        $$quote($$BASEDIR/assets/logos/1440x1440.png) \
+        $$quote($$BASEDIR/assets/logos/144x144.png) \
+        $$quote($$BASEDIR/assets/logos/480x480.png) \
+        $$quote($$BASEDIR/assets/logos/720x1280.png) \
+        $$quote($$BASEDIR/assets/logos/720x720.png) \
+        $$quote($$BASEDIR/assets/logos/768x1280.png) \
+        $$quote($$BASEDIR/assets/logos/86x86.png) \
+        $$quote($$BASEDIR/assets/logos/90x90.png) \
+        $$quote($$BASEDIR/assets/logos/96x96.png) \
         $$quote($$BASEDIR/assets/main.qml) \
         $$quote($$BASEDIR/assets/pin.qml) \
         $$quote($$BASEDIR/assets/viewMap.qml)
@@ -44,10 +59,10 @@ config_pri_assets {
 
 config_pri_source_group1 {
     SOURCES += \
-        $$quote($$BASEDIR/src/MapViewDemo.cpp) \
+        $$quote($$BASEDIR/src/AutoLibMap.cpp) \
         $$quote($$BASEDIR/src/main.cpp)
 
-    HEADERS += $$quote($$BASEDIR/src/MapViewDemo.hpp)
+    HEADERS += $$quote($$BASEDIR/src/AutoLibMap.hpp)
 }
 
 CONFIG += precompile_header
@@ -66,7 +81,10 @@ lupdate_inclusion {
         $$quote($$BASEDIR/../assets/*.qs) \
         $$quote($$BASEDIR/../assets/images/*.qml) \
         $$quote($$BASEDIR/../assets/images/*.js) \
-        $$quote($$BASEDIR/../assets/images/*.qs)
+        $$quote($$BASEDIR/../assets/images/*.qs) \
+        $$quote($$BASEDIR/../assets/logos/*.qml) \
+        $$quote($$BASEDIR/../assets/logos/*.js) \
+        $$quote($$BASEDIR/../assets/logos/*.qs)
 
     HEADERS += \
         $$quote($$BASEDIR/../src/*.h) \

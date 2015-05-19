@@ -70,14 +70,18 @@
 
     <!--  Name of author which is used for signing. Must match the developer name of your development certificate. -->
     <icon>
-       <image>logo.png</image>
-       <image>logo94.png</image>
-       <image>logo94 - copie.png</image>
-       <image>Logo110.png</image>
-       <image>logo114.png</image>
+       <image>86x86.png</image>
+       <image>90x90.png</image>
+       <image>96x96.png</image>
+       <image>110x110.png</image>
+       <image>144x144.png</image>
     </icon>
     <splashScreens>
-       <image>Couverture1.png</image>
+       <image>1024x600.png</image>
+       <image>720x1280.png</image>
+       <image>720x720.png</image>
+       <image>1440x1440.png</image>
+       <image>768x1280.png</image>
     </splashScreens>
     <category>core.media</category>
     <authorId>gYAAgFnJCa1_wTKyY8pevRbtquI</authorId>
@@ -101,12 +105,16 @@
     <asset path="translations" dest="qm">
         <include name="*.qm"/>
     </asset>
-    <asset path="/Users/Toinou/Desktop/LogoBB10/Logo/logo.png">logo.png</asset>
-    <asset path="/Users/Toinou/Desktop/LogoBB10/Logo/logo94.png">logo94.png</asset>
-    <asset path="/Users/Toinou/Desktop/LogoBB10/Logo/logo94 - copie.png">logo94 - copie.png</asset>
-    <asset path="/Users/Toinou/Desktop/LogoBB10/Logo/Logo110.png">Logo110.png</asset>
-    <asset path="/Users/Toinou/Desktop/LogoBB10/Logo/logo114.png">logo114.png</asset>
-    <asset path="/Users/Toinou/Desktop/LogoBB10/Couverture1.png">Couverture1.png</asset>
+    <asset path="assets/logos/86x86.png">86x86.png</asset>
+    <asset path="assets/logos/90x90.png">90x90.png</asset>
+    <asset path="assets/logos/96x96.png">96x96.png</asset>
+    <asset path="assets/logos/110x110.png">110x110.png</asset>
+    <asset path="assets/logos/144x144.png">144x144.png</asset>
+    <asset path="assets/logos/1024x600.png">1024x600.png</asset>
+    <asset path="assets/logos/720x1280.png">720x1280.png</asset>
+    <asset path="assets/logos/720x720.png">720x720.png</asset>
+    <asset path="assets/logos/1440x1440.png">1440x1440.png</asset>
+    <asset path="assets/logos/768x1280.png">768x1280.png</asset>
 
     <!-- Request permission to execute native code.  Required for native applications. -->
     <permission system="true">run_native</permission>

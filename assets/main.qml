@@ -21,21 +21,6 @@ import bb.cascades.maps 1.0
 NavigationPane {
     
     id: nav
-    Menu.definition: MenuDefinition {        
-        actions: [
-            ActionItem {
-                title: "A propos"
-            },
-            ActionItem {
-                title: "Partager"
-
-            },
-            ActionItem {
-                title: "Noter"
-
-            }
-        ] 
-    } 
     
 Page {
     titleBar: 
@@ -43,34 +28,40 @@ Page {
         title : "Auto lib Paris"        
     }
     Container {
+
     Label {
         id: rechercheDep
-        text:"Recherhe par département : "
+        text:"Saisir le numéro de département : "
+        horizontalAlignment: HorizontalAlignment.Center
     }
         TextField {
             id:departement
             text: "92330"
             accessibility.name: "departement TextField"
             }
+        Label {
+            id:error
+            visible: false
+        }
         Button {
             text:"Rechercher"
+            horizontalAlignment: HorizontalAlignment.Center
            onClicked: {
                if(departement.text != "")
                {
-                   listautolib.visible = false
+                   error.visible = false;
                    myIndicator.visible = true
                    dataSource.source = "http://public.opendatasoft.com/api/records/1.0/search?dataset=stations_et_espaces_autolib_de_la_metropole_parisienne&q=" +departement.text + "&facet=identifiant_autolib&facet=code_postal&facet=ville&facet=emplacement"
                    dataSource.load()
-                   listautolib.visible = true
                }
                else 
                {
-                   departement.text = "Merci de saisir un département"
+                   error.visible = true;
+                   error.text = "Merci de saisir un département.";
                }
 
            }
         }
-        
         ActivityIndicator {
             id: myIndicator
             horizontalAlignment: HorizontalAlignment.Center
@@ -80,6 +71,7 @@ Page {
             visible: false
             accessibility.name: "myIndicator"
         }
+
 
         ListView {
             id:listautolib
@@ -96,17 +88,53 @@ Page {
                 
             ]
             accessibility.name: "FirstListView"
-onTriggered: {
-    var selectedItem = dataModel.data(indexPath);
-    var page = mapPages.createObject();
-    page.latitude = selectedItem.fields.field13[0];
-    page.longitude = selectedItem.fields.field13[1];
-    nav.push(page);
-}
+                onTriggered: {
+                    var selectedItem = dataModel.data(indexPath);
+                    _mapViewTest.addPoint(selectedItem.fields.field13[1], selectedItem.fields.field13[0]);
+                    }
         } 
-        
+        MapView {
+            id: mapview
+            altitude: 3000
+            preferredWidth: 768
+            preferredHeight: 1280
+            objectName: "mapViewObj"
+            visible: false;
+        }
+        onCreationCompleted: {
+           
+        }
+          
     }
-    
+    actions: [                         
+
+        ActionItem {
+            title: "Géo-localisation"
+            ActionBar.placement: ActionBarPlacement.Signature
+            imageSource: "asset:///images/ic_map.png"
+            onTriggered: {
+
+            }
+        },
+        ActionItem {
+            title: "Departement"
+            imageSource: "asset:///images/ic_search.png"
+            ActionBar.placement: ActionBarPlacement.Signature
+            onTriggered: {
+            
+            }
+        },
+        InvokeActionItem {
+
+            query {
+                mimeType: "text/plain"
+                invokeActionId: "bb.action.SHARE"
+            }
+            onTriggered: {
+                data = "J'ai cherché une AutoLib' via l'application AutoLib' Paris pour Blackberry 10";
+            }
+        }
+    ]
     attachedObjects: [
         ComponentDefinition {
             id: mapPages
@@ -123,14 +151,17 @@ onTriggered: {
         id: dataSource
         type: DataSourceType.Json
         remote: true    
-    onDataLoaded: {
-        dataModel.clear(); 
-        dataModel.insertList(data.records);
-        myIndicator.visible = false;
-    }
-    } 
-    
-    ] 
+            onDataLoaded: {
+                dataModel.clear(); 
+                    dataModel.insertList(data.records);
+                        myIndicator.visible = false;
+                            }
+                        } 
+                ] 
 
-} 
+    } 
+    onCreationCompleted: {
+        myIndicator.start();
+        myIndicator.visible = false;
+        }
 }

@@ -15,7 +15,7 @@
  */
 
 //#include "applicationui.hpp"
-#include "MapViewDemo.hpp"
+#include "AutoLibMap.hpp"
 #include <bb/cascades/Application>
 
 #include <QLocale>
@@ -31,7 +31,7 @@ Q_DECL_EXPORT int main(int argc, char **argv)
 
     // Create the Application UI object, this is where the main.qml file
     // is loaded and the application scene is set.
-    MapViewDemo appui(&app);
+    AutoLibMap appui(&app);
 
     // Enter the application main event loop.
     return Application::exec();
