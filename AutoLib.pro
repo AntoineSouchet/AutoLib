@@ -8,6 +8,6 @@ LIBS += -lbb
 LIBS += -lbbdata
 LIBS += -lbbplatform
 LIBS += -lbbplatformbbm 
-
+LIBS += -lQtLocationSubset
 
 include(config.pri)

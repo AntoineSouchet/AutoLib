@@ -14,6 +14,7 @@
 #include <bb/platform/bbm/Context>
 #include <bb/platform/bbm/MessageService>
 #include <bb/platform/bbm/UserProfile>
+#include <QtLocationSubset/QGeoPositionInfo>
 
     namespace bb {
     namespace cascades {
@@ -36,7 +37,8 @@
         AutoLibMap(bb::cascades::Application *app);
         Q_INVOKABLE void Map(double latitude,double longitude,QString adresse);
         Q_INVOKABLE void MoreNear(double latitude,double longitude,QString adresse);
-
+        Q_INVOKABLE void positionUpdated(QGeoPositionInfo geoPositionInfo);
+        Q_INVOKABLE void startGPS();
     private:
 
     };

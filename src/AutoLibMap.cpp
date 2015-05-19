@@ -20,6 +20,7 @@
 #include <bb/platform/geo/Marker>
 #include <bb/platform/geo/GeoLocation>
 #include <bb/data/JsonDataAccess>
+#include <QtLocationSubset/QGeoPositionInfo>
 
 #include <QPoint>
 
@@ -28,7 +29,7 @@
     using namespace bb::platform::geo;
     using namespace bb::system;
     using namespace bb::data;
-
+    using namespace QtMobilitySubset;
 
     AutoLibMap::AutoLibMap(bb::cascades::Application *app) :
                     QObject(app)
@@ -43,6 +44,51 @@
                 // set created root object as a scene
                 app->setScene(root);
             }
+
+    void GetMoreNearStation()
+    {
+
+    }
+
+
+    void AutoLibMap::positionUpdated(QGeoPositionInfo geoPositionInfo) {
+
+        if (geoPositionInfo.isValid()) {
+            // We've got the position. No need to continue the listening.
+            locationDataSource->stopUpdates();
+
+            // Save the position information into a member variable
+            myPositionInfo = geoPositionInfo;
+
+            // Get the current location as latitude and longitude
+            QGeoCoordinate geoCoordinate = geoPositionInfo.coordinate();
+            qreal latitude = geoCoordinate.latitude();
+            qreal longitude = geoCoordinate.longitude();
+
+            qDebug()<< QString("Latitude: %1 Longitude: %2").arg(latitude).arg(longitude);
+
+
+
+        }
+
+    }
+
+    void AutoLibMap::startGPS() {
+
+        qDebug() << " << starting GPS >>";
+
+        // Obtain the location data source if it is not obtained already
+        if (!locationDataSource) {
+            locationDataSource = QGeoPositionInfoSource::createDefaultSource(this);
+            // Whenever the location data source signals that the current
+            // position is updated, the positionUpdated function is called
+            connect(locationDataSource, SIGNAL(positionUpdated(QGeoPositionInfo)),this, SLOT(positionUpdated(QGeoPositionInfo)));
+
+            // Start listening for position updates
+            locationDataSource->startUpdates();
+        }
+    }
+
 
     void AutoLibMap::MoreNear(double latitude,double longitude,QString adresse)
     {
