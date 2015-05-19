@@ -38,15 +38,16 @@ config_pri_assets {
     OTHER_FILES += \
         $$quote($$BASEDIR/assets/images/on_map_pin.png) \
         $$quote($$BASEDIR/assets/main.qml) \
+        $$quote($$BASEDIR/assets/pin.qml) \
         $$quote($$BASEDIR/assets/viewMap.qml)
 }
 
 config_pri_source_group1 {
     SOURCES += \
-        $$quote($$BASEDIR/src/applicationui.cpp) \
+        $$quote($$BASEDIR/src/MapViewDemo.cpp) \
         $$quote($$BASEDIR/src/main.cpp)
 
-    HEADERS += $$quote($$BASEDIR/src/applicationui.hpp)
+    HEADERS += $$quote($$BASEDIR/src/MapViewDemo.hpp)
 }
 
 CONFIG += precompile_header

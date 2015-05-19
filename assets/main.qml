@@ -25,10 +25,6 @@ NavigationPane {
         actions: [
             ActionItem {
                 title: "A propos"
-//                onTriggered: {
-//                    var page = proposPages.createObject();
-//                    nav.push(page);
-//                }
             },
             ActionItem {
                 title: "Partager"
@@ -53,24 +49,27 @@ Page {
     }
         TextField {
             id:departement
-        }
+            text: "92330"
+            accessibility.name: "departement TextField"
+            }
         Button {
             text:"Rechercher"
            onClicked: {
-           listautolib.visible = false
-           myIndicator.visible = true
-           dataSource.source = "http://public.opendatasoft.com/api/records/1.0/search?dataset=stations_et_espaces_autolib_de_la_metropole_parisienne&q=" + departement.text + "&facet=identifiant_autolib&facet=code_postal&facet=ville&facet=emplacement"
-           dataSource.load()
-           listautolib.visible = true
+               if(departement.text != "")
+               {
+                   listautolib.visible = false
+                   myIndicator.visible = true
+                   dataSource.source = "http://public.opendatasoft.com/api/records/1.0/search?dataset=stations_et_espaces_autolib_de_la_metropole_parisienne&q=" +departement.text + "&facet=identifiant_autolib&facet=code_postal&facet=ville&facet=emplacement"
+                   dataSource.load()
+                   listautolib.visible = true
+               }
+               else 
+               {
+                   departement.text = "Merci de saisir un département"
+               }
+
            }
         }
-        
-//        MapView {
-//            id: mapview
-//            altitude: 3000
-//            latitude: 45.342614
-//            longitude: -75.914991
-//        }
         
         ActivityIndicator {
             id: myIndicator
@@ -81,62 +80,17 @@ Page {
             visible: false
             accessibility.name: "myIndicator"
         }
+
         ListView {
             id:listautolib
             dataModel: dataModel 
-            //visible: false
             listItemComponents: [
                 ListItemComponent {
                     type: "item"
-                    
-                    content: Container {            
-                        Container {
-                            layout: StackLayout {
-                                orientation: LayoutOrientation.TopToBottom
-                            }
-                            Label {
-                                id: idAuto
-                                multiline: true
-                                horizontalAlignment: HorizontalAlignment.Center
-                                text: "Identifiant : " + ListItemData.fields.identifiant_autolib
-                            }
-                            Label {
-                                id: emplacementAuto
-                                multiline: true
-                                horizontalAlignment: HorizontalAlignment.Center
-                                text: "Emplacement : " + ListItemData.fields.emplacement
-                            }
-                            Label {
-                                id: codeAuto
-                                multiline: true
-                                horizontalAlignment: HorizontalAlignment.Center
-                                text: "Code postal : " + ListItemData.fields.code_postal
-                            }
-                            Label {
-                                id: rueAuto
-                                multiline: true
-                                horizontalAlignment: HorizontalAlignment.Center
-                                text:  "Rue : " + ListItemData.fields.rue
-                            }
-                            Label {
-                                id: x
-                                text : ListItemData.fields.field13[0]
-                           
-                                visible: false
-                            }
-                            
-                            Label {
-                                id: y
-                                text : ListItemData.fields.field13[1]
-                                visible: false
-                            }
-
-                            Container {
-                                layout: StackLayout {
-                                    orientation: LayoutOrientation.TopToBottom
-                                }
-                            }
-                        }
+                    StandardListItem {
+                        title: ListItemData.fields.ville
+                        description: ListItemData.fields.rue
+                        status: ListItemData.fields.code_postal
                     }
                 }
                 
@@ -164,11 +118,10 @@ onTriggered: {
             grouping: ItemGrouping.ByFullValue
 
         },
+        
     DataSource {
         id: dataSource
         type: DataSourceType.Json
-        source: "http://public.opendatasoft.com/api/records/1.0/search?dataset=stations_et_espaces_autolib_de_la_metropole_parisienne&q=75010&facet=identifiant_autolib&facet=code_postal&facet=ville&facet=emplacement"
-       // source : "http://www.blackberry-10.fr/jsonfile_last10.php"
         remote: true    
     onDataLoaded: {
         dataModel.clear(); 
@@ -178,9 +131,6 @@ onTriggered: {
     } 
     
     ] 
-    onCreationCompleted: {
 
-        dataSource.load();
-    }
 } 
 }
