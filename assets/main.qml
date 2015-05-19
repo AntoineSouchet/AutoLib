@@ -36,7 +36,7 @@ Page {
     }
         TextField {
             id:departement
-            text: "92330"
+            //text: "92330"
             accessibility.name: "departement TextField"
             }
         Label {
@@ -101,7 +101,7 @@ Page {
             ActionBar.placement: ActionBarPlacement.Signature
             imageSource: "asset:///images/ic_map.png"
             onTriggered: {
-
+_mapViewTest.startGPS();
             }
         },
         ActionItem {

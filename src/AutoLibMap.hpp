@@ -14,8 +14,13 @@
 #include <bb/platform/bbm/Context>
 #include <bb/platform/bbm/MessageService>
 #include <bb/platform/bbm/UserProfile>
-#include <QtLocationSubset/QGeoPositionInfo>
 
+
+#include <QObject>
+#include <QtLocationSubset/QGeoPositionInfo>
+#include <QtLocationSubset/QGeoPositionInfoSource>
+
+using namespace QtMobilitySubset;
     namespace bb {
     namespace cascades {
     class Application;
@@ -40,7 +45,7 @@
         Q_INVOKABLE void positionUpdated(QGeoPositionInfo geoPositionInfo);
         Q_INVOKABLE void startGPS();
     private:
-
+        QGeoPositionInfoSource *locationDataSource;
     };
 
     #endif
