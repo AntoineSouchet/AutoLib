@@ -11,14 +11,9 @@
     #include <QObject>
     #include <QVariant>
 
-#include <bb/platform/bbm/Context>
-#include <bb/platform/bbm/MessageService>
-#include <bb/platform/bbm/UserProfile>
-
-
-#include <QObject>
 #include <QtLocationSubset/QGeoPositionInfo>
 #include <QtLocationSubset/QGeoPositionInfoSource>
+#include <QtNetwork>
 
 using namespace QtMobilitySubset;
     namespace bb {
@@ -44,8 +39,10 @@ using namespace QtMobilitySubset;
         Q_INVOKABLE void MoreNear(double latitude,double longitude,QString adresse);
         Q_INVOKABLE void positionUpdated(QGeoPositionInfo geoPositionInfo);
         Q_INVOKABLE void startGPS();
+        Q_INVOKABLE void CallWebServiceWithCoord(double latitude,double longitude);
     private:
         QGeoPositionInfoSource *locationDataSource;
+        void getWsInformations(QNetworkReply*);
     };
 
     #endif

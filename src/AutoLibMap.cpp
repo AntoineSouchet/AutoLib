@@ -21,6 +21,7 @@
 #include <bb/platform/geo/GeoLocation>
 #include <bb/data/JsonDataAccess>
 #include <QtLocationSubset/QGeoPositionInfo>
+#include <QtNetwork>
 
 #include <QPoint>
 
@@ -67,18 +68,36 @@
             qreal longitude = geoCoordinate.longitude();
 
             qDebug()<< QString("Latitude: %1 Longitude: %2").arg(latitude).arg(longitude);
-
-
-
+            CallWebServiceWithCoord(latitude,longitude);
         }
 
     }
 
     void AutoLibMap::CallWebServiceWithCoord(double latitude,double longitude)
     {
-        Qstring url = "";
-        qDebug << "";
+        QString url = "http://public.opendatasoft.com/api/records/1.0/search?dataset=stations_et_espaces_autolib_de_la_metropole_parisienne&lang=FR&rows=1&facet=identifiant_autolib&facet=code_postal&facet=ville&facet=emplacement&geofilter.distance=48.8587455%2C+2.5101638%2C20000";
+        QNetworkRequest request = QNetworkRequest();
+        request.setUrl(QUrl(url));
+        QNetworkAccessManager* networkAccessManager = new QNetworkAccessManager(this);
+            connect(networkAccessManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(getWsInformations(QNetworkReply*)));
+            networkAccessManager->get(request);
     }
+
+
+    void AutoLibMap::getWsInformations(QNetworkReply* reply){
+
+        qDebug() << "getWsInformations ! ";
+        if (reply->error() == QNetworkReply::NoError)
+          {
+            qDebug() << "Read all and create JSON file ! ";
+            QString mJsonData = reply->readAll();
+            JsonDataAccess jda;
+            qDebug() << mJsonData;
+            QVariant mainList = jda.loadFromBuffer(mJsonData);
+          }
+          reply->deleteLater();
+        }
+
 
     void AutoLibMap::startGPS() {
 

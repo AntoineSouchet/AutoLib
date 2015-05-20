@@ -2,6 +2,8 @@ APP_NAME = AutoLib
 
 CONFIG += qt warn_on cascades10
 
+QT += network
+
 LIBS += -lbb -lQtLocationSubset -lbbcascadesmaps -lGLESv1_CM
 LIBS += -lbbsystem
 LIBS += -lbb
