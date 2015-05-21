@@ -68,21 +68,21 @@
             qreal longitude = geoCoordinate.longitude();
 
             qDebug()<< QString("Latitude: %1 Longitude: %2").arg(latitude).arg(longitude);
-            CallWebServiceWithCoord(latitude,longitude);
+            CallWebServiceWithCoord(QString::number(latitude),QString::number(longitude));
         }
 
     }
 
-    void AutoLibMap::CallWebServiceWithCoord(double latitude,double longitude)
+    void AutoLibMap::CallWebServiceWithCoord(QString latitude,QString longitude)
     {
-        QString url = "http://public.opendatasoft.com/api/records/1.0/search?dataset=stations_et_espaces_autolib_de_la_metropole_parisienne&lang=FR&rows=1&facet=identifiant_autolib&facet=code_postal&facet=ville&facet=emplacement&geofilter.distance=48.8587455%2C+2.5101638%2C20000";
+        QString url = "http://public.opendatasoft.com/api/records/1.0/search?dataset=stations_et_espaces_autolib_de_la_metropole_parisienne&facet=identifiant_autolib&facet=code_postal&facet=ville&facet=emplacement&geofilter.distance=48.8587455,2.41011,5000";
         QNetworkRequest request = QNetworkRequest();
         request.setUrl(QUrl(url));
         QNetworkAccessManager* networkAccessManager = new QNetworkAccessManager(this);
+
             connect(networkAccessManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(getWsInformations(QNetworkReply*)));
             networkAccessManager->get(request);
     }
-
 
     void AutoLibMap::getWsInformations(QNetworkReply* reply){
 
@@ -94,17 +94,25 @@
             JsonDataAccess jda;
             qDebug() << mJsonData;
             QVariant mainList = jda.loadFromBuffer(mJsonData);
+            QMap<QString, QVariant> jsonreply = mainList.toMap();
+
+
           }
           reply->deleteLater();
         }
+
+    void AutoLibMap::finished(QNetworkReply* reply)
+    {
+        reply->deleteLater();
+    }
+
+
 
 
     void AutoLibMap::startGPS() {
 
         qDebug() << " << starting GPS >>";
 
-        // Obtain the location data source if it is not obtained already
-        if (locationDataSource) {
             locationDataSource = QGeoPositionInfoSource::createDefaultSource(this);
             // Whenever the location data source signals that the current
             // position is updated, the positionUpdated function is called
@@ -112,7 +120,7 @@
 
             // Start listening for position updates
             locationDataSource->startUpdates();
-        }
+
     }
 
 

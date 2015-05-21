@@ -39,10 +39,13 @@ using namespace QtMobilitySubset;
         Q_INVOKABLE void MoreNear(double latitude,double longitude,QString adresse);
         Q_INVOKABLE void positionUpdated(QGeoPositionInfo geoPositionInfo);
         Q_INVOKABLE void startGPS();
-        Q_INVOKABLE void CallWebServiceWithCoord(double latitude,double longitude);
+        Q_INVOKABLE void CallWebServiceWithCoord(QString latitude,QString longitude);
+        Q_INVOKABLE  void getWsInformations(QNetworkReply*);
+
     private:
         QGeoPositionInfoSource *locationDataSource;
-        void getWsInformations(QNetworkReply*);
+
+        void finished(QNetworkReply*);
     };
 
     #endif

@@ -23,12 +23,19 @@ NavigationPane {
     id: nav
     
 Page {
+    
+
     titleBar: 
     TitleBar {
         title : "Auto lib Paris"        
     }
     Container {
 
+   function test() {
+       var xhr = new XMLHttpRequest();
+       xhr.open("GET","http://data.json",true);
+    }
+    
     Label {
         id: rechercheDep
         text:"Saisir le numéro de département : "
