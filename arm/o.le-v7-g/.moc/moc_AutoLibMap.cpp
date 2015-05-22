@@ -22,7 +22,7 @@ static const uint qt_meta_data_AutoLibMap[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-       6,   14, // methods
+       4,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -33,9 +33,7 @@ static const uint qt_meta_data_AutoLibMap[] = {
       39,   12,   11,   11, 0x02,
       66,   12,   11,   11, 0x02,
      114,   98,   11,   11, 0x02,
-     148,   11,   11,   11, 0x02,
-     178,  159,   11,   11, 0x02,
-     219,   11,   11,   11, 0x02,
+     156,   11,  148,   11, 0x02,
 
        0        // eod
 };
@@ -45,9 +43,7 @@ static const char qt_meta_stringdata_AutoLibMap[] = {
     "Map(double,double,QString)\0"
     "MoreNear(double,double,QString)\0"
     "geoPositionInfo\0positionUpdated(QGeoPositionInfo)\0"
-    "startGPS()\0latitude,longitude\0"
-    "CallWebServiceWithCoord(QString,QString)\0"
-    "getWsInformations(QNetworkReply*)\0"
+    "QString\0startGPS()\0"
 };
 
 void AutoLibMap::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
@@ -59,9 +55,8 @@ void AutoLibMap::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 0: _t->Map((*reinterpret_cast< double(*)>(_a[1])),(*reinterpret_cast< double(*)>(_a[2])),(*reinterpret_cast< QString(*)>(_a[3]))); break;
         case 1: _t->MoreNear((*reinterpret_cast< double(*)>(_a[1])),(*reinterpret_cast< double(*)>(_a[2])),(*reinterpret_cast< QString(*)>(_a[3]))); break;
         case 2: _t->positionUpdated((*reinterpret_cast< QGeoPositionInfo(*)>(_a[1]))); break;
-        case 3: _t->startGPS(); break;
-        case 4: _t->CallWebServiceWithCoord((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2]))); break;
-        case 5: _t->getWsInformations((*reinterpret_cast< QNetworkReply*(*)>(_a[1]))); break;
+        case 3: { QString _r = _t->startGPS();
+            if (_a[0]) *reinterpret_cast< QString*>(_a[0]) = _r; }  break;
         default: ;
         }
     }
@@ -99,9 +94,9 @@ int AutoLibMap::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 6)
+        if (_id < 4)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 6;
+        _id -= 4;
     }
     return _id;
 }

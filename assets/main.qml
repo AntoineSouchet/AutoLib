@@ -30,15 +30,39 @@ Page {
         title : "Auto lib Paris"        
     }
     Container {
-
-   function test() {
+id: root
+   function getIti() {
+       var position = _mapViewTest.startGPS();
+       var arrayPos = position.split(";");
+       var lat = arrayPos[0];
+       var longi = arrayPos[1];
        var xhr = new XMLHttpRequest();
-       xhr.open("GET","http://data.json",true);
-    }
+       xhr.open("GET","http://public.opendatasoft.com/api/records/1.0/search?dataset=stations_et_espaces_autolib_de_la_metropole_parisienne&facet=identifiant_autolib&facet=code_postal&facet=ville&facet=emplacement&geofilter.distance=" + lat + "," + longi + ",5000",true);
+       xhr.onreadystatechange = function() {
+           var status;
+           var data;
+
+           if (xhr.readyState == 4) { // `DONE`
+               status = xhr.status;
+ 
+               if (status == 200) {
+                   data = JSON.parse(xhr.responseText);
+                   var nearLat = data.records[0].fields.field13[0];
+                   var nearLong = data.records[0].fields.field13[1];
+                   var addresse = data.records[0].fields.ville;
+                   _mapViewTest.MoreNear(nearLat, nearLong, addresse);
+               } else {
+
+               }
+           }
+       };
+       xhr.send();
+
+}
     
     Label {
         id: rechercheDep
-        text:"Saisir le numéro de département : "
+        text:"Saisir le numéro de département ou la ville : "
         horizontalAlignment: HorizontalAlignment.Center
     }
         TextField {
@@ -108,7 +132,9 @@ Page {
             ActionBar.placement: ActionBarPlacement.Signature
             imageSource: "asset:///images/ic_map.png"
             onTriggered: {
-_mapViewTest.startGPS();
+                myIndicator.visible = true;
+                root.getIti();
+                myIndicator.visible = false;
             }
         },
         ActionItem {
@@ -157,6 +183,7 @@ _mapViewTest.startGPS();
     } 
     onCreationCompleted: {
         myIndicator.start();
+        _mapViewTest.startGPS();
         myIndicator.visible = false;
         }
 }
