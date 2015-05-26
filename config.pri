@@ -52,9 +52,7 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/logos/86x86.png) \
         $$quote($$BASEDIR/assets/logos/90x90.png) \
         $$quote($$BASEDIR/assets/logos/96x96.png) \
-        $$quote($$BASEDIR/assets/main.qml) \
-        $$quote($$BASEDIR/assets/pin.qml) \
-        $$quote($$BASEDIR/assets/viewMap.qml)
+        $$quote($$BASEDIR/assets/main.qml)
 }
 
 config_pri_source_group1 {

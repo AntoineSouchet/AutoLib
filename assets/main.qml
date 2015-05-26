@@ -42,9 +42,8 @@ id: root
            var status;
            var data;
 
-           if (xhr.readyState == 4) { // `DONE`
+           if (xhr.readyState == 4) {
                status = xhr.status;
- 
                if (status == 200) {
                    data = JSON.parse(xhr.responseText);
                    var nearLat = data.records[0].fields.field13[0];
@@ -152,15 +151,11 @@ id: root
                 invokeActionId: "bb.action.SHARE"
             }
             onTriggered: {
-                data = "J'ai cherché une AutoLib' via l'application AutoLib' Paris pour Blackberry 10";
+                data = "J'ai cherché une AutoLib' via l'application AutoLib' Paris pour BlackBerry 10";
             }
         }
     ]
     attachedObjects: [
-        ComponentDefinition {
-            id: mapPages
-            source: "viewMap.qml"
-        },
         GroupDataModel {
             id: dataModel
             sortedAscending: false
